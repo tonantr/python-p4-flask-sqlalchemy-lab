@@ -1,5 +1,6 @@
 from os import environ
 import re
+import pdb
 
 from app import app, db
 from server.models import Animal, Enclosure, Zookeeper
@@ -24,11 +25,12 @@ class TestApp:
 
     def test_animal_route_has_attrs(self):
         '''displays attributes in animal route in <ul> tags called Name, Species.'''
+
         name_ul = re.compile(r'\<ul\>[Nn]ame.+')
         species_ul = re.compile(r'\<ul\>[Ss]pecies.+')
         
         response = app.test_client().get('/animal/1')
-
+        
         assert(len(name_ul.findall(response.data.decode())) == 1)
         assert(len(species_ul.findall(response.data.decode())) == 1)
 

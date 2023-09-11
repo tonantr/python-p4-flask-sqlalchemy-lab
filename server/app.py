@@ -32,25 +32,10 @@ def animal_by_id(id):
 
     response_body = f"""
     <pre>
-    <ul style="list-style-type:none">
-        <li>ID: {animal.id}</li> 
-    </ul>
-
-    <ul style="list-style-type:none">
-        <li>Name: {animal.name}</li>
-    </ul>
-
-    <ul style="list-style-type:none">
-        <li>Species: {animal.species}</li>
-    </ul>
-
-    <ul style="list-style-type:none">
-        <li>Zookeeper: {animal.zookeeper.name}</li>
-    </ul>
-
-    <ul style="list-style-type:none">
-        <li>Enclosure: {animal.enclosure.environment}</li>
-    </ul>
+    <ul>Name: {animal.name}</ul>
+    <ul>Species: {animal.species}</ul>
+    <ul>Zookeeper: {animal.zookeeper.name}</ul>
+    <ul>Enclosure: {animal.enclosure.environment}</ul>
     </pre>
     """
     response = make_response(response_body, 200)
@@ -66,15 +51,12 @@ def zookeeper_by_id(id):
         response = make_response(response_body, 404)
         return response
 
-    animal_list = "\n".join([f"Animal: {animal.name}" for animal in zookeeper.animals])
+    animal_list = "\n\n".join([f"Animal: {animal.name}" for animal in zookeeper.animals])
     response_body = f"""
     <pre>
-    <ul style="list-style-type:none">
-        <li>ID: {zookeeper.id}</li>
-        <li>Name: {zookeeper.name}</li>
-        <li>Birthday: {zookeeper.birthday}</li>
-        <li>{animal_list}</li>
-    </ul>
+    <ul>Name: {zookeeper.name}</ul>
+    <ul>Birthday: {zookeeper.birthday}</ul>
+    <ul>{animal_list}</ul>
     </pre>
     """
     response = make_response(response_body)
@@ -90,15 +72,13 @@ def enclosure_by_id(id):
         response = make_response(response_body)
         return response
     
-    animal_list = '\n'.join([f'Animal: {animal.name}' for animal in enclosure.animals])
+    animal_list = '\n\n'.join([f'Animal: {animal.name}' for animal in enclosure.animals])
     response_body = f"""
     <pre>
-    <ul style="list-style-type:none">
-        <li>ID: {enclosure.id}</li>
-        <li>Environment: {enclosure.environment}</li>
-        <li>Open to Visitors: {enclosure.open_to_visitors}</li>
-        <li>{animal_list}</li>
-    </ul>
+    <ul>ID: {enclosure.id}</ul>
+    <ul>Environment: {enclosure.environment}</ul>
+    <ul>Open to Visitors: {enclosure.open_to_visitors}</ul>
+    <ul>{animal_list}</ul>
     </pre>
     """
 
